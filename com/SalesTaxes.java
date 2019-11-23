@@ -30,6 +30,16 @@ public class SalesTaxes {
         return Integer.valueOf(strCount);
     }
 
+    public static Double actualPrice(String list){  // Get the price of the element and convert it to a double
+        String[] elements = new String[list.length()+1];
+        elements = list.split(" ");
+        
+        String strPrice = list.split(" ")[elements.length-1];
+        return Double.valueOf(strPrice);
+    }
+
+
+
     public static void main(String[] args) throws Exception{ //Main function
         // Read data file
         File file = new File("/Users/danielball/Desktop/SalesTaxes/data.txt");
@@ -41,11 +51,9 @@ public class SalesTaxes {
 
 
         int count = howMany(arlist.get(1));
-        double price = 0.0;
+        double price = actualPrice(arlist.get(1));
         boolean imported = isImported(arlist.get(1));
         String taxType = taxType(arlist.get(2));
-        
-       
 
 
         double num = 4.1985;
@@ -54,7 +62,7 @@ public class SalesTaxes {
         System.out.println(rounded);
         System.out.println(arlist.get(3)); // get element from array list
         // this even works if chocolate is plural
-        System.out.println(count);
+        System.out.println(price);
     }
     
 } 
