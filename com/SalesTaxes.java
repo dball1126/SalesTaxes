@@ -13,7 +13,7 @@ public class SalesTaxes {
        return list.indexOf("import") != -1 ? true : false;
     }
 
-    public static String taxType(String list){
+    public static String taxType(String list){ //Check to see basic sales type
         
         String type = "";
         if (list.indexOf("headache") != -1 || list.indexOf("pill") != -1 || list.indexOf("chocolate") != -1 ||
@@ -23,6 +23,11 @@ public class SalesTaxes {
             type = "Yes basic sales tax";
         }
         return type;
+    }
+
+    public static Integer howMany(String list){ // Check to see how many items of a specific type in basket
+        String strCount = list.split(" ")[0];
+        return Integer.valueOf(strCount);
     }
 
     public static void main(String[] args) throws Exception{ //Main function
@@ -35,10 +40,13 @@ public class SalesTaxes {
         while ((st = br.readLine()) != null) arlist.add(st); // Read first line
 
 
-        int count = 0;
+        int count = howMany(arlist.get(1));
         double price = 0.0;
         boolean imported = isImported(arlist.get(1));
         String taxType = taxType(arlist.get(2));
+        
+       
+
 
         double num = 4.1985;
         double rounded = Math.ceil(7.63 * 20) / 20.0; // round up to nearest 0.05
@@ -46,7 +54,7 @@ public class SalesTaxes {
         System.out.println(rounded);
         System.out.println(arlist.get(3)); // get element from array list
         // this even works if chocolate is plural
-        System.out.println(taxType);
+        System.out.println(count);
     }
     
 } 
