@@ -31,11 +31,19 @@ public class SalesTaxes {
     }
 
     public static Double actualPrice(String list){  // Get the price of the element and convert it to a double
-        String[] elements = new String[list.length()+1];
+        String[] elements = new String[(list.length() / 2) +1];
         elements = list.split(" ");
         
         String strPrice = list.split(" ")[elements.length-1];
         return Double.valueOf(strPrice);
+    }
+
+    public static Double basicTaxAmount(Double price, String type){ // calculate basic tax amount which is 10%
+        if (type == "No basic sales tax"){
+            return 0.0;
+        } else {   
+           return Math.ceil((price / 10) * 20) / 20.0; // round up to nearest 0.05
+        }
     }
 
 
@@ -53,16 +61,14 @@ public class SalesTaxes {
         int count = howMany(arlist.get(1));
         double price = actualPrice(arlist.get(1));
         boolean imported = isImported(arlist.get(1));
-        String taxType = taxType(arlist.get(2));
+        String taxType = taxType(arlist.get(1));
+        double basicTax = basicTaxAmount(price, taxType);
 
-
-        double num = 4.1985;
-        double rounded = Math.ceil(7.63 * 20) / 20.0; // round up to nearest 0.05
+       System.out.println(basicTax);
         
-        System.out.println(rounded);
         System.out.println(arlist.get(3)); // get element from array list
         // this even works if chocolate is plural
-        System.out.println(price);
+        System.out.println(basicTax);
     }
     
 } 
