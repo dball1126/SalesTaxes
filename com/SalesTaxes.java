@@ -38,23 +38,14 @@ public class SalesTaxes {
         return Double.valueOf(strPrice);
     }
 
-    public static Double basicTaxAmount(Double price, String type){ // calculate basic tax amount which is 10%
-       
-           return type == "No basic sales tax" ? 0.0 : Math.ceil((price / 10) * 20) / 20.0; // round up to nearest 0.05
-    }
-
-    public static Double importTaxAmount(Double price, boolean imported){ // calculate import tax which is 5%
-         
-          return !imported ? Math.ceil((price / 20) * 20) / 20.0 : 0.0; // round up to nearest 0.05
-    }
-
     public static void main(String[] args) throws Exception{ //Main function
         // Read data file
         File file = new File("/Users/danielball/Desktop/SalesTaxes/data.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st = "";
         ArrayList<String> arlist = new ArrayList<String>();
-
+        Tax taxes = new Tax(); // Create new Tax instance...now functions accessible through this variable
+        
         while ((st = br.readLine()) != null) arlist.add(st); // Read first line
 
 
@@ -62,8 +53,8 @@ public class SalesTaxes {
         double price = actualPrice(arlist.get(1));
         boolean imported = isImported(arlist.get(1));
         String taxType = taxType(arlist.get(1));
-        double basicTax = basicTaxAmount(price, taxType);
-        double importTax = importTaxAmount(price, imported);
+        double basicTax = taxes.basicTaxAmount(price, taxType);
+        double importTax = taxes.importTaxAmount(price, imported);
         System.out.println(importTax);
         System.out.println(arlist.get(0)); // get element from array list
         // this even works if chocolate is plural
