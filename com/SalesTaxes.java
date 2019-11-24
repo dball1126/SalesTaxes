@@ -39,14 +39,14 @@ public class SalesTaxes {
     }
 
     public static Double basicTaxAmount(Double price, String type){ // calculate basic tax amount which is 10%
-        if (type == "No basic sales tax"){
-            return 0.0;
-        } else {   
-           return Math.ceil((price / 10) * 20) / 20.0; // round up to nearest 0.05
-        }
+       
+           return type == "No basic sales tax" ? 0.0 : Math.ceil((price / 10) * 20) / 20.0; // round up to nearest 0.05
     }
 
-
+    public static Double importTaxAmount(Double price, boolean imported){ // calculate import tax which is 5%
+         
+          return !imported ? Math.ceil((price / 20) * 20) / 20.0 : 0.0; // round up to nearest 0.05
+    }
 
     public static void main(String[] args) throws Exception{ //Main function
         // Read data file
@@ -63,10 +63,9 @@ public class SalesTaxes {
         boolean imported = isImported(arlist.get(1));
         String taxType = taxType(arlist.get(1));
         double basicTax = basicTaxAmount(price, taxType);
-
-       System.out.println(basicTax);
-        
-        System.out.println(arlist.get(3)); // get element from array list
+        double importTax = importTaxAmount(price, imported);
+        System.out.println(importTax);
+        System.out.println(arlist.get(0)); // get element from array list
         // this even works if chocolate is plural
         System.out.println(basicTax);
     }
