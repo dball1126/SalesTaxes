@@ -5,39 +5,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.IntStream;
 import java.util.Arrays;
+import java.util.regex.Pattern;
+// import java.util.regex;
+// import java.util.regex.Matchter;
 
 public class SalesTaxes {
 
-    public static boolean isImported(String list){  // Check to see if it's imported      
-       return list.indexOf("import") != -1 ? true : false;
-    }
-
-    public static String taxType(String list){ //Check to see basic sales type
-        
-        String type = "";
-        if (list.indexOf("headache") != -1 || list.indexOf("pill") != -1 || list.indexOf("chocolate") != -1 ||
-           list.indexOf("book") != -1 || list.indexOf("food") != -1){
-               type = "No basic sales tax";
-        } else {
-            type = "Yes basic sales tax";
-        }
-        return type;
-    }
-
-    public static Integer howMany(String list){ // Check to see how many items of a specific type in basket
-        String strCount = list.split(" ")[0];
-        return Integer.valueOf(strCount);
-    }
-
-    public static Double actualPrice(String list){  // Get the price of the element and convert it to a double
-        String[] elements = new String[(list.length() / 2) +1];
-        elements = list.split(" ");
-        
-        String strPrice = list.split(" ")[elements.length-1];
-        return Double.valueOf(strPrice);
-    }
-
+    
     public static void main(String[] args) throws Exception{ //Main function
         // Read data file
         File file = new File("/Users/danielball/Desktop/SalesTaxes/data.txt");
@@ -45,21 +21,24 @@ public class SalesTaxes {
         String st = "";
         ArrayList<String> arlist = new ArrayList<String>();
         Tax taxes = new Tax(); // Create new Tax instance...now functions accessible through this variable
-        
-        while ((st = br.readLine()) != null) arlist.add(st); // Read first line
+        Value values = new Value(); // Create new Value instance...now functions accessible through this variable
+        while ((st = br.readLine()) != null) arlist.add(st); // Read first line and append to an array
 
 
-        int count = howMany(arlist.get(1));
-        double price = actualPrice(arlist.get(1));
-        boolean imported = isImported(arlist.get(1));
-        String taxType = taxType(arlist.get(1));
+        int count = values.howMany(arlist.get(1));
+        double price = values.actualPrice(arlist.get(1));
+        boolean imported = values.isImported(arlist.get(1));
+        String taxType = values.taxType(arlist.get(1));
         double basicTax = taxes.basicTaxAmount(price, taxType);
         double importTax = taxes.importTaxAmount(price, imported);
-        System.out.println(importTax);
-        System.out.println(arlist.get(0)); // get element from array list
-        // this even works if chocolate is plural
-        System.out.println(basicTax);
-    }
+        String output = values.output(arlist.get(1), imported);
+
+        double d = importTax + basicTax + price;
+        
+        System.out.println(arlist.get(1)); // get element from array list
+        System.out.println(count + " " + output + " " + d);
+       
+    }   
     
 } 
 
