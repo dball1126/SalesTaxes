@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.List;
 import java.util.Arrays;
+import java.text.DecimalFormat;
 
 public class Tax {
 
@@ -16,7 +17,7 @@ public class Tax {
     }
 
     public  Double importTaxAmount(Double price, boolean imported){ // calculate import tax which is 5%
-      
+        
        return imported ? Math.ceil((price / 20) * 20) / 20.0 : 0.0; // round up to nearest 0.05
     }
 }
