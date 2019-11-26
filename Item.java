@@ -5,7 +5,7 @@ public class Item {
     public String name;
     public double tax;
 
-    public void create(String item){
+    public Item(String item){
         isImported(item);
         taxExempt(item);
         name(item, this.imported);

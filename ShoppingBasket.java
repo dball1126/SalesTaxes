@@ -16,8 +16,8 @@ public class ShoppingBasket {
 
         while ((st = br.readLine()) != null) basket.add(st); // Read line by line and append to an ArrayList
 
-        Receipt receipt = new Receipt();  
-        receipt.create(basket, tax);            // Create the receipt
+        Receipt receipt = new Receipt(basket, tax);    // Create the receipt  
+                
        
         if (basket.size() > 0){ // If there is input data print out the receipt.
             receipt.print();
