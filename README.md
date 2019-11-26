@@ -9,6 +9,12 @@ Write an application that prints out the receipt details for these shopping bask
 # Walk Through
 The input data is a list of items from a shopping basket. Set the tax rate by creating a new tax instance. We create a receipt by passing in the items of the basket and the tax rate. A new item is created from the items in the basket. A new SalesTax is created by the item. We add LineItems to the receipt by calculating how many of a particular item, it's tax rate, and it's price + tax rate. We add two more LineItems to the receipt to calculate the total cost and total sales tax and we print everything out.
 
+- ShoppingBasket: This is our entry file. Read the data and pass the basket into our Receipt.
+- Tax: basicRate, importRate.
+- Receipt: salesTaxes, total, receiptList.
+- Item: imported, price, name, tax, taxExempt.
+- SalesTax: basicRate, importRate, importTax, basicTax, totalTax
+
 # How To Run (Command Line)
 Assuming you have Java installed, preferably JDK 8. You can do two things:
 - Go into the folder and compile it via the command `javac ShoppingBasket.java`.
@@ -56,4 +62,3 @@ Output 3:
 - 1 imported box of chocolates: 11.85
 - Sales Taxes: 6.70
 - Total: 74.68
-==========

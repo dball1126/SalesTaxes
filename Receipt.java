@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Receipt {
     public double salesTaxes;
     public double total;
-    public ArrayList<String> receipt = new ArrayList<String>();;
+    public ArrayList<String> receiptList = new ArrayList<String>();;
     
     public Receipt(ArrayList<String> basket, Tax tax){
 
@@ -34,21 +34,21 @@ public class Receipt {
         this.salesTaxes += item.tax;
         String formattedPrice = String.format("%.02f", (item.tax + item.price) * count);
         String lineItem = (count + " " + item.name + " " + formattedPrice);
-        this.receipt.add(lineItem);    // Add line item output in string format to the receipt.
+        this.receiptList.add(lineItem);    // Add line item output in string format to the receipt.
     }
 
     public void computeTotal(){ // Add total and salestax to receipt
         String formattedSalesTaxes = String.format("%.02f", this.salesTaxes); 
         String formattedTotal = String.format("%.02f", this.total);
-        this.receipt.add("Sales Taxes: " + formattedSalesTaxes);
-        this.receipt.add("Total: " + formattedTotal);
+        this.receiptList.add("Sales Taxes: " + formattedSalesTaxes);
+        this.receiptList.add("Total: " + formattedTotal);
     }
 
     public void print(){  // Print out the receipt.
         computeTotal();  // Compute total amount and sales tax
 
-        for (int i = 0; i < this.receipt.size(); i++) {
-            System.out.println(this.receipt.get(i));
+        for (int i = 0; i < this.receiptList.size(); i++) {
+            System.out.println(this.receiptList.get(i));
         }
     }
 }
