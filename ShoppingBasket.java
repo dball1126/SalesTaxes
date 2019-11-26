@@ -10,14 +10,16 @@ public class ShoppingBasket {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st = "";
         ArrayList<String> basket = new ArrayList<String>();
-        
+        double basicTaxRate = .10;   // Set the tax rates 
+        double importTaxRate = .05;
+        Tax tax = new Tax(importTaxRate, basicTaxRate);
+
         while ((st = br.readLine()) != null) basket.add(st); // Read line by line and append to an ArrayList
 
-        Receipt receipt = new Receipt();
-        receipt.create(basket);
+        Receipt receipt = new Receipt();  
+        receipt.create(basket, tax);            // Create the receipt
        
-    
-        if (basket.size() > 0){ // If there is input data print out the total amounts
+        if (basket.size() > 0){ // If there is input data print out the receipt.
             receipt.print();
         } else {
             System.out.println("NO INPUT DATA"); // If file is empty......

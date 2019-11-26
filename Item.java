@@ -12,8 +12,6 @@ public class Item {
         price(item);
     }
 
-
-
     public boolean isImported(String list){  // Check to see if it's imported      
        this.imported = list.indexOf("import") != -1 ? true : false;
        return this.imported;
@@ -22,12 +20,12 @@ public class Item {
     public String name(String list, boolean imported){  // Extract the name of the item;
         String name = "";
         int count = 1;
-        String[] elements = new String[(list.length() / 2) +1];
-        elements = list.split(" ");
+        String[] data = new String[(list.length() / 2) +1];
+        data = list.split(" ");
         
-            for(int i = count; i < elements.length -2; i++){
-                name += elements[i];
-                if (i + 1 >= elements.length -2){
+            for(int i = count; i < data.length -2; i++){
+                name += data[i];
+                if (i + 1 >= data.length -2){
                     name += ":";
                 } else {
                     name += " ";
