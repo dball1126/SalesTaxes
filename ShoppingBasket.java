@@ -10,7 +10,7 @@ public class ShoppingBasket {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st = "";
         ArrayList<String> basket = new ArrayList<String>();
-        double basicTaxRate = .10;   // Set the tax rates 
+        double basicTaxRate = .10;   // Set the tax rates, this one in particular is equivalent to 10%
         double importTaxRate = .05;
         Tax tax = new Tax(importTaxRate, basicTaxRate);
 
