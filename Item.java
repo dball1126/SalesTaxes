@@ -1,4 +1,4 @@
-public class Value {
+public class Item {
     
     public boolean isImported(String list){  // Check to see if it's imported      
        return list.indexOf("import") != -1 ? true : false;
