@@ -6,8 +6,9 @@ public class SalesTaxes {
     
     public static void main(String[] args) throws Exception{ //Main function
         // Read data file
-        File file = new File("/Users/danielball/Desktop/SalesTaxes/data.txt");
-        BufferedReader br = new BufferedReader(new FileReader(file));
+        String file = "";
+        file = (args.length == 0) ? "data.txt" : args[0]; // if no file is loaded via command line default to data.txt
+        BufferedReader br = new BufferedReader(new FileReader("data.txt"));
         String st = "";
         ArrayList<String> basket = new ArrayList<String>();
         Tax taxes = new Tax(); // Create new Tax instance...now functions accessible through this variable
