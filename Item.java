@@ -57,7 +57,7 @@ public class Item {
         return this.price;
     }
 
-    public Double tax(double basicTax, double importTax){
+    public Double tax(double basicTax, double importTax){  // Set the tax for a particular item
         this.tax = basicTax + importTax;
         return this.tax;
     }
