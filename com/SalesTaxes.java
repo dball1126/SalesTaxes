@@ -1,16 +1,5 @@
-import java.util.Scanner;
 import java.io.*;
-import java.text.DecimalFormat;
 import java.util.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.IntStream;
-import java.util.Arrays;
-import java.util.regex.Pattern;
-// import java.util.regex;
-// import java.util.regex.Matchter;
 
 public class SalesTaxes {
 
@@ -20,32 +9,40 @@ public class SalesTaxes {
         File file = new File("/Users/danielball/Desktop/SalesTaxes/data.txt");
         BufferedReader br = new BufferedReader(new FileReader(file));
         String st = "";
-        ArrayList<String> arlist = new ArrayList<String>();
+        ArrayList<String> basket = new ArrayList<String>();
         Tax taxes = new Tax(); // Create new Tax instance...now functions accessible through this variable
         Value values = new Value(); // Create new Value instance...now functions accessible through this variable
-        while ((st = br.readLine()) != null) arlist.add(st); // Read first line and append to an array
-        
-        for (int i = 0; i < arlist.size(); i++) {
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(4);
+        while ((st = br.readLine()) != null) basket.add(st); // Read first line and append to an array
         double salesTaxes = 0.0;
         double total = 0.0;
-        int count = values.howMany(arlist.get(i));
-        double price = values.actualPrice(arlist.get(i));
-        boolean imported = values.isImported(arlist.get(i));
-        String taxType = values.taxType(arlist.get(i));
+
+        for (int i = 0; i < basket.size(); i++) { // Iterate over the basket line by line
+
+        int count = values.howMany(basket.get(i));
+        double price = values.actualPrice(basket.get(i), count);
+        boolean imported = values.isImported(basket.get(i));
+        String taxType = values.taxType(basket.get(i));
         double basicTax = taxes.basicTaxAmount(price, taxType);
         double importTax = taxes.importTaxAmount(price, imported);
-        String output = values.output(arlist.get(i), imported);
-        double d = importTax + basicTax + price;
-        String formattedPrice = String.format("%.02f", d);
+        String output = values.output(basket.get(i), imported);
+        total += (importTax + basicTax + price);
+        salesTaxes += (importTax + basicTax);
+        String formattedPrice = String.format("%.02f", importTax + basicTax + price);
         System.out.println(count + " " + output + " " + formattedPrice);
-        }
-        
 
-        
+        }
+
+
+        String formattedSalesTaxes = String.format("%.02f", salesTaxes);
+        String formattedTotal = String.format("%.02f", total);
+
+        if (basket.size() > 1){ // If there is input data print out the total amounts
+            System.out.println("Sales Taxes: " + formattedSalesTaxes);
+            System.out.println("Total: " + formattedTotal);
+        } else {
+            System.out.println("NO INPUT DATA");
+        }
     }   
-    
 } 
 
 

@@ -3,10 +3,9 @@ public class Value {
        return list.indexOf("import") != -1 ? true : false;
     }
 
-    public String output(String list, boolean imported){
+    public String output(String list, boolean imported){  // line by line output for each item
         String partialString = "";
-        int count = 2;
-        if (imported) count = 1;
+        int count = 1;
         String[] elements = new String[(list.length() / 2) +1];
         elements = list.split(" ");
         
@@ -39,11 +38,11 @@ public class Value {
         return Integer.valueOf(strCount);
     }
 
-    public Double actualPrice(String list){  // Get the price of the element and convert it to a double
+    public Double actualPrice(String list, Integer count){  // Get the price of the element and convert it to a double
         String[] elements = new String[(list.length() / 2) +1];
         elements = list.split(" ");
         
         String strPrice = list.split(" ")[elements.length-1];
-        return Double.valueOf(strPrice);
+        return Double.valueOf(strPrice) * count;
     }
 }
